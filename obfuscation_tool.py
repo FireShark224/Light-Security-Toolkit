@@ -3,10 +3,14 @@ import hashlib
 import random
 import time
 
+#user input
 text = input("Input text you want to obfuscate: ")
 textsum = text.encode()
 
+#handle the obfuscation
 def obfuscation_service():
+
+    #encoding processes
     base64_text = base64.b64encode(textsum)
     base32_text = base64.b32encode(textsum)
     base16_text = base64.b16encode(textsum)
@@ -15,6 +19,8 @@ def obfuscation_service():
     print("Base32 text: ", base32_text)
     print("Base16 text: ", base16_text)
     print("Writing obfuscation data + hashes into a txt file...")
+
+    #compute the hashes
     md5sumT = hashlib.md5(textsum).hexdigest()
     md5sum64 = hashlib.md5(base64_text).hexdigest()
     md5sum32 = hashlib.md5(base32_text).hexdigest()
@@ -23,6 +29,8 @@ def obfuscation_service():
     sha256sum64 = hashlib.sha256(base64_text).hexdigest()
     sha256sum32 = hashlib.sha256(base32_text).hexdigest()
     sha256sum16 = hashlib.sha256(base16_text).hexdigest()
+
+    #write data into a file and create the said file
     with open(f'obfuscation_log_{random.randint(1000, 9999)}.txt', 'w') as file:
         file.write("Text: " + text + "\n")
         file.write("Base64: " + base64_text.decode() + "\n")
