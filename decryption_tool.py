@@ -3,12 +3,13 @@ from cryptography import fernet
 import time
 import random
 
-
+#user inputs
 key = input("Input the encryption key: ") #user input for the key
 encrypted_text = input("Input the encrypted text: ") #user input for the encrypted text
 keysum = key.encode() #turn the key string into bytes
 tool_decrypt = fernet.Fernet(key) #variable that uses the key
 
+#function to handle decryption
 def decryption_service():
     decrypted_text = fernet.Fernet(key).decrypt(encrypted_text) #decryption process
     print("your key: ", key)
